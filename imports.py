@@ -14,7 +14,7 @@ def seed_everything(seed=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-def get_orig_model(model_id="Models/Qwen3-8B"):
+def get_orig_model(model_id="Qwen/Qwen3-8B"):
   seed_everything(42)
   orig_model = AutoModelForCausalLM.from_pretrained(
       model_id,
@@ -25,7 +25,7 @@ def get_orig_model(model_id="Models/Qwen3-8B"):
 
   return orig_model, orig_tokenizer
 
-def compress_model(model_id="Models/Qwen3-8B"):
+def compress_model(model_id="Qwen/Qwen3-8B"):
     seed_everything(42)
     quantization_config = BitsAndBytesConfig(load_in_4bit=True)
 
@@ -72,5 +72,6 @@ def get_question_prompt(raw, with_answer=False):
 
     if with_answer:
         prompt += f" {ANSWERS[raw['answer']]}\n\n"
+
 
     return prompt
